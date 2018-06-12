@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<process>
+	<port name="iport" direction="in" type="int" length="1024"/>
+	<port name="oport" direction="out" type="int" length="1024"/>
+	<operation>
+			<skeleton_type>transpose</skeleton_type>
+			<width>2</width>
+			<height>256</height>
+			<tuple_size>2</tuple_size>
+			<basetype>
+					<type0>int</type0>
+			</basetype>
+	</operation>
+</process>
+</document>

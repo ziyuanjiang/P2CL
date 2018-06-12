@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<function_descriptions>
+	<function>
+		<decl>void fft_bfly2(FLOAT4 fin, int index, FLOAT4* fout, int m)</decl>
+		<num_input>2</num_input>
+		<num_output>1</num_output>
+		<num_para>1</num_para>
+	</function>
+	<fuction/>
+</function_descriptions>
+<process>
+	<port name="iport" direction="in" type="float" length="1024"/>
+	<port name="oport" direction="out" type="float" length="1024"/>
+	<shared_variable name="fft_2pow" value_type="value">9</shared_variable>
+	<shared_variable name="fft_length" value_type="expr" para_list="fft_2pow">pow(2, fft_2pow)</shared_variable>
+	<stage_generate>
+		<num_of_stages value_type="expr" para_list="fft_2pow">fft_2pow</num_of_stages>
+		<iterator_name>i</iterator_name>
+		<shared_variable name="m" value_type="expr" para_list="fft_length i">
+			fft_length/pow(2, i+1)
+		</shared_variable>
+		<map>
+			<num_of_extensions value_type="expr" para_list="i">pow(2, i)</num_of_extensions>
+			<operation>
+					<skeleton_type>gather</skeleton_type>
+					<tuple_size>2</tuple_size>
+					<input_range value_type="expr" para_list="m">2 * m</input_range>
+					<offset>0</offset>
+					<offset value_type="expr" para_list="m">m</offset>
+					<length value_type="expr" para_list="m">m</length>
+			</operation>
+			<operation>
+					<skeleton_type>map</skeleton_type>
+					<function>fft_bfly2</function>
+					<func_para>
+							<para0 value_type="expr" para_list="m">m</para0>
+					</func_para>
+					<length value_type="expr" para_list="m">m</length>
+			</operation>
+			<operation>
+					<skeleton_type>scatter</skeleton_type>
+					<length value_type="expr" para_list="m">m</length>
+					<tuple_size>2</tuple_size>
+					<output_range value_type="expr" para_list="m">2 * m</output_range>
+					<offset>0</offset>
+					<offset value_type="expr" para_list="m">m</offset>
+			</operation>
+		</map>
+	</stage_generate>
+	<stage_generate>
+		<num_of_stages value_type="expr" para_list="fft_2pow">fft_2pow</num_of_stages>
+		<iterator_name>i</iterator_name>
+		<shared_variable name="m" value_type="expr" para_list="fft_length i">
+			fft_length/pow(2, i+1)
+		</shared_variable>
+		<map>
+			<num_of_extensions value_type="expr" para_list="i">pow(2, i)</num_of_extensions>
+			<operation>
+					<skeleton_type>transpose</skeleton_type>
+					<width>2</width>
+					<height value_type="expr" para_list="m">m</height>
+					<tuple_size>2</tuple_size>
+					<basetype>
+							<type0>float</type0>
+					</basetype>
+			</operation>
+		</map>
+	</stage_generate>
+</process>
+</document>

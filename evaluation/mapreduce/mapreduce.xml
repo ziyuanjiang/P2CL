@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<function_descriptions>
+	<function>
+		<decl>void vector_mul(float a, float b, float* c)</decl>
+		<num_input>2</num_input>
+		<num_output>1</num_output>
+		<num_para>0</num_para>
+	</function>
+	<function>
+		<decl>void vector_sum(float a, float b, float* c)</decl>
+		<num_input>2</num_input>
+		<num_output>1</num_output>
+		<num_para>0</num_para>
+	</function>
+</function_descriptions>
+<process>
+	<port name="iport0" direction="in" type="float" length="131072"/>
+	<port name="iport1" direction="in" type="float" length="131072"/>
+	<port name="oport" direction="out" type="float" length="1"/>
+
+	<operation>
+			<skeleton_type>map</skeleton_type>
+			<function>vector_mul</function>
+			<length value_type="value">131072</length>
+	</operation>
+	<operation>
+			<skeleton_type>reduce</skeleton_type>
+			<function>vector_sum</function>
+			<length value_type="value">131072</length>
+	</operation>
+</process>
+</document>

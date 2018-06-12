@@ -1,0 +1,40 @@
+typedef struct {
+    float r;
+    float i;
+}fft_cpx;
+
+void fft_bfly2(
+	FLOAT4 Fin,
+	int index,
+	FLOAT4* Fout,
+	int m
+)
+{
+	fft_cpx t;
+	fft_cpx tw;
+	fft_cpx In;
+	fft_cpx In2;
+	float phase = -3.1415926535898932384626f/m;
+
+	In.r = Fin.e0;
+	In.i = Fin.e1;
+	In2.r = Fin.e2;
+	In2.i = Fin.e3;
+	(tw).r = (float) cos(phase * index); 
+	(tw).i = (float) sin(phase * index);
+
+	(t).r=(In).r-(In2).r; 
+	(t).i=(In).i-(In2).i;
+
+	(In).r += (In2).r;
+	(In).i += (In2).i;
+	(In2).r = (t).r*(tw).r - (t).i*(tw).i; 
+	(In2).i = (t).r*(tw).i + (t).i*(tw).r;
+
+	Fout->e0 = In.r;
+	Fout->e1 = In.i;
+	Fout->e2 = In2.r;
+	Fout->e3 = In2.i;
+//	printf("in:\t%d\t%f\t%f\t%f\t%f\n", index, Fin.e0, Fin.e1, Fin.e2, Fin.e3);
+//	printf("out:\t%d\t%f\t%f\t%f\t%f\n", index, In.r, In.i, In2.r, In2.i);
+}

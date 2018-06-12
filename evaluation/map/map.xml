@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<function_descriptions>
+	<function>
+		<decl>void f0(float fin, int index, float* fout)</decl>
+		<num_input>2</num_input>
+		<num_output>1</num_output>
+		<num_para>0</num_para>
+	</function>
+	<fuction/>
+</function_descriptions>
+<process>
+	<port name="iport" direction="in" type="float" length="65536"/>
+	<port name="oport" direction="out" type="float" length="65536"/>
+	<operation>
+			<skeleton_type>map</skeleton_type>
+			<function>f0</function>
+			<length>65536</length>
+	</operation>
+</process>
+</document>

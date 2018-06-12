@@ -1,0 +1,34 @@
+#include <pthread.h>
+#include <iostream>
+#include <sstream>
+#include <unistd.h>
+#include "wtime.hpp"
+#include "frontendutils.hpp"
+#include "process.hpp"
+
+int main(int argc, char *argv[])
+{
+	float *fout = new float[replace];
+	int retVal;
+	double rtime;
+	float value;
+
+	p2cl::Process obj(1,"reshape.xml");
+
+	rtime = wtime();
+
+	for(int j = 0; j < 1000; ++j)
+	{
+
+		obj.pushBack(sizeof(float) * replace, 0, fout);
+
+		//retVal = obj.pop(0, fout);
+		//while(retVal != 4096)std::cout<<retVal<<std::endl;
+		obj.pop(0, fout); 
+	}
+
+	rtime = wtime() - rtime;
+	std::cout<<"ran in\t"<< rtime/1000 <<"\tseconds"<<std::endl;
+	delete [] fout;
+}
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<function_descriptions>
+	<function>
+		<decl>void f_cal(int index, float* c, int num)</decl>
+		<num_input>1</num_input>
+		<num_output>1</num_output>
+		<num_para>1</num_para>
+	</function>
+	<function>
+		<decl>void add(float a, float b, float* c)</decl>
+		<num_input>2</num_input>
+		<num_output>1</num_output>
+		<num_para>0</num_para>
+	</function>
+</function_descriptions>
+<process>
+	<port name="oport" direction="out" type="float" length="1"/>
+
+	<operation>
+			<skeleton_type>map</skeleton_type>
+			<function>f_cal</function>
+			<func_para>
+				<para0 value_type="value">65536</para0>
+			</func_para>
+			<length value_type="value">65536</length>
+	</operation>
+	<operation>
+			<skeleton_type>reduce</skeleton_type>
+			<function>add</function>
+			<length value_type="value">65536</length>
+	</operation>
+</process>
+</document>

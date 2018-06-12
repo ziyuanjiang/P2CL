@@ -1,0 +1,11 @@
+void vector_mul(float a, float b, float* c)
+{
+	*c = a * b;
+	for(int j = 0; j < 1000; ++j)
+		*c += 1;
+}
+
+void vector_sum(float a, float b, float* c)
+{
+	*c = a + b;
+}

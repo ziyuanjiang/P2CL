@@ -1,0 +1,19 @@
+void f0(
+	FLOAT2 Fin,
+	int index,
+	FLOAT2* Fout
+)
+{
+
+	float out0 = Fin.e0;
+	float out1 = Fin.e1;
+
+	for(int i = 0; i < 10;++i)
+	{
+		out0 = out0 + 1;
+		out1 = out1 + 1;
+	}
+
+	Fout->e0 = out0;
+	Fout->e1 = out1;
+}

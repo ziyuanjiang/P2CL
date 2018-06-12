@@ -1,0 +1,10 @@
+void f0(
+	float g_in,
+	int index,
+	float* g_out
+)
+{
+	float out = g_in;
+	out+= 1;
+	*g_out = out;
+}

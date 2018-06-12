@@ -1,0 +1,12 @@
+__kernel void operation0(
+		__global float *	input0
+		,
+		__global float *	output0
+)
+{
+	size_t g0 = get_global_id(0);
+	int x = g0 % rh;
+	int y = g0 /rh;
+	
+	output0[x * rw + y] = input0[g0];
+}
